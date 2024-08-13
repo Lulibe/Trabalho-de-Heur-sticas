@@ -1,0 +1,9 @@
+*.out
+*.exe
+busca_tabu_tsp
+busca_tabu_mochila
+Mochila_Simulated_Annealing
+teste
+test
+verifica.cpp
+TSP_Simulated_Annealing
