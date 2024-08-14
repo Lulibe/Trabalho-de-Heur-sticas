@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+busca_tabu_TSP
+busca_tabu_mochila
+Mochila_Simulated_annealing
+TSP_Simulated_annealing
+verifica.cpp
+resultados_busca_tabu.csv
+resultados_busca_tabu_mochila.csv
+resultados_busca_tabu_TSP.csv
+resultados_tabu_search.csv
+test_tabu_mochila.py

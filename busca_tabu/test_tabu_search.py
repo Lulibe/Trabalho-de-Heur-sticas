@@ -39,4 +39,4 @@ df = pd.DataFrame(resultados)
 print(df)
 
 # Salva os resultados em um arquivo CSV, se necessário
-df.to_csv("resultados_tabu_search.csv", index=False)
+df.to_csv("resultados_busca_tabu_TSP.csv", index=False)
