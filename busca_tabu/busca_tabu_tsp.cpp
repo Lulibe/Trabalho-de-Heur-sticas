@@ -126,8 +126,18 @@ pair<double, vector<int>> buscaTabuTSP(const vector<Cidade> &cidades, const vect
     return {melhorDistancia, melhorRota};
 }
 
-int main() {
-    // Local do arquivo de entrada
+int main(int argc, char* argv[]) {
+    if (argc < 4) {
+        cerr << "Uso: " << argv[0] << " <tamanhoTabu> <iteracoesMax> <iteracoesSemMelhoraMax>" << endl;
+        return 1;
+    }
+
+    // Lê os parâmetros da linha de comando
+    int tamanhoTabu = stoi(argv[1]);
+    int iteracoesMax = stoi(argv[2]);
+    int iteracoesSemMelhoraMax = stoi(argv[3]);
+
+    // Local fixo do arquivo de entrada
     string nomeArquivo = "./Aula2_Complementares/tsp_51";
 
     // Lê as cidades do arquivo
@@ -139,11 +149,6 @@ int main() {
         solucaoInicial[i] = i;
     }
     random_shuffle(solucaoInicial.begin(), solucaoInicial.end());
-
-    // Parâmetros da Busca Tabu
-    int tamanhoTabu = 11; // tamanho da lista tabu
-    int iteracoesMax = 100; // número máximo de iterações
-    int iteracoesSemMelhoraMax = 100; // número máximo de iterações sem melhora
 
     // Aplica Busca Tabu para resolver o TSP
     auto resultado = buscaTabuTSP(cidades, solucaoInicial, tamanhoTabu, iteracoesMax, iteracoesSemMelhoraMax);
