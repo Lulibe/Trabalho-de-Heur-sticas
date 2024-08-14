@@ -65,7 +65,7 @@ for temp_inicial in temperatura_inicial_values:
                 ])
 
 # Salvando os resultados em um arquivo CSV
-with open("resultados_simulated_annealing.csv", "w", newline='') as csvfile:
+with open("resultados_simulated_annealing_tsp.csv", "w", newline='') as csvfile:
     escritor_csv = csv.writer(csvfile)
     # Escrevendo o cabeçalho
     escritor_csv.writerow([
@@ -76,4 +76,4 @@ with open("resultados_simulated_annealing.csv", "w", newline='') as csvfile:
     for resultado in resultados:
         escritor_csv.writerow(resultado)
 
-print("Resultados salvos em 'resultados_simulated_annealing.csv'")
+print("Resultados salvos em 'resultados_simulated_annealing_tsp.csv'")

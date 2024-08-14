@@ -148,7 +148,7 @@ int main(int argc, char* argv[]) {
     for (size_t i = 0; i < cidades.size(); ++i) {
         solucaoInicial[i] = i;
     }
-    random_shuffle(solucaoInicial.begin(), solucaoInicial.end());
+    //random_shuffle(solucaoInicial.begin(), solucaoInicial.end());
 
     // Aplica Busca Tabu para resolver o TSP
     auto resultado = buscaTabuTSP(cidades, solucaoInicial, tamanhoTabu, iteracoesMax, iteracoesSemMelhoraMax);

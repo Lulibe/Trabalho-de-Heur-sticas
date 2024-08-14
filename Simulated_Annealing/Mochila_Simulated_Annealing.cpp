@@ -63,17 +63,25 @@ vector<int> gerarVizinha(const vector<int> &solucao) {
     return novaSolucao;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+    if (argc != 5) {
+        cerr << "Uso: " << argv[0] << " <temperaturaInicial> <temperaturaMinima> <fatorResfriamento> <iteracoesPorTemperatura>" << endl;
+        return 1;
+    }
+
     srand(time(nullptr));
 
-    // Ler os dados do arquivo
-    Mochila mochila = lerArquivo("./Aula2_Complementares/mochila_100_1000_1");
+    // Ler os parâmetros do Simulated Annealing da linha de comando
+    double temperaturaInicial = stod(argv[1]);
+    double temperaturaMinima = stod(argv[2]);
+    double fatorResfriamento = stod(argv[3]);
+    int iteracoesPorTemperatura = stoi(argv[4]);
 
-    // Parâmetros do Simulated Annealing
-    double temperaturaInicial = 10000;
-    double temperaturaMinima = 1;
-    double fatorResfriamento = 0.995;
-    int iteracoesPorTemperatura = 100;
+    // Definir o nome do arquivo diretamente no código
+    string nomeArquivo = "./Aula2_Complementares/mochila_100_1000_1";
+
+    // Ler os dados do arquivo
+    Mochila mochila = lerArquivo(nomeArquivo);
 
     // Inicialização da solução
     vector<int> solucaoAtual(mochila.itens.size(), 0); // Solução inicial (vazia)
