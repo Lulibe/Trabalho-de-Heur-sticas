@@ -40,3 +40,5 @@ resultados_busca_tabu_mochila.csv
 resultados_busca_tabu_TSP.csv
 resultados_tabu_search.csv
 test_tabu_mochila.py
+TSP_Simulated_Annealing
+resultados_simulated_annealing.csv

@@ -34,8 +34,19 @@ vector<int> gerarVizinha(const vector<int> &rota) {
     return novaRota;
 }
 
-int main() {
+int main(int argc, char* argv[]) {
     srand(time(nullptr));
+
+    if (argc < 5) {
+        cerr << "Uso: " << argv[0] << " <temperaturaInicial> <temperaturaMinima> <fatorResfriamento> <iteracoesPorTemperatura>" << endl;
+        return 1;
+    }
+
+    // Parâmetros do Simulated Annealing recebidos como argumentos de linha de comando
+    double temperaturaInicial = stod(argv[1]);
+    double temperaturaMinima = stod(argv[2]);
+    double fatorResfriamento = stod(argv[3]);
+    int iteracoesPorTemperatura = stoi(argv[4]);
 
     vector<Cidade> cidades;
     ifstream arquivo("./Aula2_Complementares/tsp_51");
@@ -58,12 +69,6 @@ int main() {
             matrizDistancias[i][j] = calcularDistancia(cidades[i], cidades[j]);
         }
     }
-
-    // Parâmetros do Simulated Annealing
-    double temperaturaInicial = 10000;
-    double temperaturaMinima = 1;
-    double fatorResfriamento = 0.995;
-    int iteracoesPorTemperatura = 100;
 
     vector<int> rota(numCidades);
     for (size_t i = 0; i < numCidades; ++i) {

@@ -1,5 +1,6 @@
 import subprocess
 import pandas as pd
+import time
 
 # Configurações dos parâmetros a serem testados
 tamanhosTabu = [5, 10, 20]
@@ -12,25 +13,41 @@ resultados = []
 # Caminho do executável
 executavel = "./busca_tabu_tsp"
 
+# Função para executar o programa e capturar a saída
+def executar_programa(tamanhoTabu, iteracoesMax, iteracoesSemMelhoraMax):
+    comando = [executavel, str(tamanhoTabu), str(iteracoesMax), str(iteracoesSemMelhoraMax)]
+    tempos_execucao = []
+    distancias_minimas = []
+
+    for _ in range(10):
+        inicio = time.time()
+        resultado = subprocess.run(comando, capture_output=True, text=True)
+        fim = time.time()
+        tempo_execucao = fim - inicio
+        
+        # Processa a saída do programa
+        linhas_saida = resultado.stdout.splitlines()
+        distancia_minima = float(linhas_saida[0].split(":")[1].strip())
+        
+        tempos_execucao.append(tempo_execucao)
+        distancias_minimas.append(distancia_minima)
+    
+    return {
+        "TamanhoTabu": tamanhoTabu,
+        "IteracoesMax": iteracoesMax,
+        "IteracoesSemMelhoraMax": iteracoesSemMelhoraMax,
+        "MelhorResultado": min(distancias_minimas),
+        "PiorResultado": max(distancias_minimas),
+        "MediaResultado": sum(distancias_minimas) / len(distancias_minimas),
+        "TempoMedioExecucao": sum(tempos_execucao) / len(tempos_execucao)
+    }
+
 # Loop através de todas as combinações de parâmetros
 for tamanhoTabu in tamanhosTabu:
     for iteracoesMax in iteracoesMaxList:
         for iteracoesSemMelhoraMax in iteracoesSemMelhoraMaxList:
-            # Executa o programa C++ com os parâmetros atuais
-            comando = [executavel, str(tamanhoTabu), str(iteracoesMax), str(iteracoesSemMelhoraMax)]
-            resultado = subprocess.run(comando, capture_output=True, text=True)
-            
-            # Processa a saída do programa
-            linhas_saida = resultado.stdout.splitlines()
-            distancia_minima = float(linhas_saida[0].split(":")[1].strip())
-
-            # Armazena os resultados
-            resultados.append({
-                "TamanhoTabu": tamanhoTabu,
-                "IteracoesMax": iteracoesMax,
-                "IteracoesSemMelhoraMax": iteracoesSemMelhoraMax,
-                "DistanciaMinima": distancia_minima
-            })
+            resultado = executar_programa(tamanhoTabu, iteracoesMax, iteracoesSemMelhoraMax)
+            resultados.append(resultado)
 
 # Cria um DataFrame a partir dos resultados
 df = pd.DataFrame(resultados)
